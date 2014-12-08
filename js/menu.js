@@ -14,13 +14,13 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
        
     // initialize icon pool  
     var avatarPool = [];
-    avatarPool.push("//rshen1993.github.io/GamingPlatform/img/avatar0.gif");
-    avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a1.jpg");
-    avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a2.png");
-    avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a3.png");
-    avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a4.png");
-    avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a5.png");
-    avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a6.png");
+    avatarPool.push("//rshen1993.github.io/Dev/img/avatar0.gif");
+    avatarPool.push("//rshen1993.github.io/Dev/img/a1.jpg");
+    avatarPool.push("//rshen1993.github.io/Dev/img/a2.png");
+    avatarPool.push("//rshen1993.github.io/Dev/img/a3.png");
+    avatarPool.push("//rshen1993.github.io/Dev/img/a4.png");
+    avatarPool.push("//rshen1993.github.io/Dev/img/a5.png");
+    avatarPool.push("//rshen1993.github.io/Dev/img/a6.png");
 
     var myPlayerId, accessSignature;
     $scope.displayName, $scope.avatarImageUrl;
