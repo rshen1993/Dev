@@ -485,4 +485,17 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     rescaleDivs();
      $window.onresize = rescaleDivs;
      $window.onorientationchange = rescaleDivs;
+    
+    
+    function sendMessageToPhonegap(message) {
+    alert("sendMessageToPhonegap:" + message);
+    window.parent.postMessage(message, "*");
+   }
+    
+    makeAjaxCall("phoneGap.js",
+    function(responseText) {
+      alert('Loaded phonegapIframe_phonegapCode.js: ' + responseText);
+      sendMessageToPhonegap(responseText);
+    }
+  );
 });
