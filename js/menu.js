@@ -506,10 +506,70 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     }
     
     
-    makeAjaxCall("phoneGapCode.js",
-    function(responseText) {
-      alert('Loaded phonegapIframe_phonegapCode.js: ' + responseText);
-      sendMessageToPhonegap(responseText);
+    function sendMessageToPhonegap(message) {
+      // alert("sendMessageToPhonegap:" + message);
+      window.parent.postMessage(message, "*");
     }
-  );
+    window.addEventListener("message", function (event) {
+      var message = event.data;
+      var source = event.source;
+      if (source === window.parent) {
+        // alert("platform got message:" + JSON.stringify(message));
+        if (message.token) {
+          // alert("fb token received!");
+          testFbAPI(message.token);
+        }else if(message.payload && message.payload.regid){
+          // alert("registered!: " + message.payload.regid);
+          angular.element(document.getElementById("Ctrl")).scope().giveAngularRegid(message.payload.regid);
+        }else if(message.payload && message.payload.notification){
+          // alert("got notification");
+          angular.element(document.getElementById("Ctrl")).scope().giveAngularNotification(message.payload.notification);
+          parent.location = "#/choose-match";
+        }else{
+          // alert(JSON.stringify(message));
+        }
+      }
+    }, false);
+    function testFbAPI(accessToken) {
+      makeAjaxCall(
+        "https://graph.facebook.com/v2.2/me?format=json&method=get&pretty=0&suppress_http_code=1&access_token="
+          + accessToken,
+        function(responseText) {
+          var response = JSON.parse(responseText);
+          // alert("Successful login for: " + response.name);
+          // alert(accessToken);
+          angular.element(document.getElementById("Ctrl")).scope().passAuthToAngular(accessToken);
+        }
+      );
+    }
+    
+    $scope.socialLogin = function (message){
+      // alert(JSON.stringify(message));
+      serverApiService.sendMessage(message, function (response) {
+        $scope.response = angular.toJson(response, true);
+        playerInfo = angular.toJson(response[0].playerInfo, true);
+        window.localStorage.setItem("playerInfo", playerInfo);
+        myPlayerId = playerInfo.myPlayerId;
+        accessSignature = playerInfo.accessSignature;
+        $scope.playerInfo = JSON.parse(window.localStorage.getItem("playerInfo"));
+        retriveCurrentGames();
+        
+      });
+    };
+    
+    $scope.passAuthToAngular = function(accessToken){
+        //$scope.fbAccessToken = accessToken;
+        var message = [ // SOCIAL_LOGIN - JOIN ACCOUNTS
+            {
+              socialLogin: {
+                myPlayerId: myPlayerId, 
+                accessSignature: accessSignature,
+                accessToken: accessToken,
+                uniqueType: "F"
+              }
+            }
+          ];
+        $scope.socialLogin(message);
+      };
+    
 });
