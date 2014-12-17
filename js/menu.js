@@ -23,7 +23,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a6.png");
 
     var myPlayerId, accessSignature;
-    $scope.displayName, $scope.avatarImageUrl;
+     $scope.displayName, $scope.avatarImageUrl;
     var MENU_URL = 'menu.html';
     var GAME_URL = 'game.html'
     /* Create a user, if necessary, by sending registerPlayer message
@@ -521,7 +521,6 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
            alert("Received: "+JSON.stringify(response));
            playerInfo = response[0].playerInfo;
         //$scope.response = angular.toJson(response, true);
-        $scope.playerInfo = response[0].playerInfo;
         window.localStorage.setItem("playerInfo", playerInfo);
         myPlayerId = playerInfo.myPlayerId;
         accessSignature = playerInfo.accessSignature;
