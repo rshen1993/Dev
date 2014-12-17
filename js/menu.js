@@ -506,7 +506,6 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     }
     
     $scope.socialLogin = function (accessToken){
-         alert("Social Login: "+JSON.stringify(accessToken));
       var message = [ // SOCIAL_LOGIN - JOIN ACCOUNTS
             {
               socialLogin: {
