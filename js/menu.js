@@ -527,7 +527,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         $scope.displayName = playerInfo.displayName;
         $scope.avatarImageUrl = playerInfo.avatarImageUrl;
         //retriveCurrentGames();
-        $rootScope.menu_interval = $interval(updateMatchesPool, timeinterval);
+        $location.path('menu'); $interval.cancel($rootScope.menu_interval);
       });
     };
     
