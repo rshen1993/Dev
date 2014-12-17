@@ -22,7 +22,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a5.png");
     avatarPool.push("//rshen1993.github.io/GamingPlatform/img/a6.png");
 
-    var myPlayerId, accessSignature;
+    var myPlayerId, accessSignature, displayName, avatarImageUrl;
     $scope.displayName, $scope.avatarImageUrl;
     var MENU_URL = 'menu.html';
     var GAME_URL = 'game.html'
@@ -506,7 +506,6 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     }
     
     $scope.socialLogin = function (accessToken){
-      alert("Social Login");
       var message = [ // SOCIAL_LOGIN - JOIN ACCOUNTS
             {
               socialLogin: {
@@ -518,12 +517,19 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
             }
           ];
       serverApiService.sendMessage(message, function (response) {
+           alert("Received Response!");
         $scope.response = angular.toJson(response, true);
         playerInfo = angular.toJson(response[0].playerInfo, true);
+        $scope.playerInfo = angular.toJson(response[0].playerInfo, true);
         window.localStorage.setItem("playerInfo", playerInfo);
         myPlayerId = playerInfo.myPlayerId;
+        $scope.myPlayerId = playerInfo.myPlayerId;
         accessSignature = playerInfo.accessSignature;
-        $scope.playerInfo = JSON.parse(window.localStorage.getItem("playerInfo"));
+        $scope.accessSignature = playerInfo.accessSignature;
+        displayName = playerInfo.displayName;
+        $scope.displayName = playerInfo.displayName;
+        avatarImageUrl = playerInfo.avatarImageUrl;
+        $scope.avatarImageUrl = playerInfo.avatarImageUrl;
         retriveCurrentGames();
       });
     };
