@@ -505,6 +505,28 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         xmlhttp.send();
     }
     
+    $scope.socialLogin = function (accessToken){
+      alert("Social Login");
+      var message = [ // SOCIAL_LOGIN - JOIN ACCOUNTS
+            {
+              socialLogin: {
+                myPlayerId: myPlayerId, 
+                accessSignature: accessSignature,
+                accessToken: accessToken,
+                uniqueType: "F"
+              }
+            }
+          ];
+      serverApiService.sendMessage(message, function (response) {
+        $scope.response = angular.toJson(response, true);
+        playerInfo = angular.toJson(response[0].playerInfo, true);
+        window.localStorage.setItem("playerInfo", playerInfo);
+        myPlayerId = playerInfo.myPlayerId;
+        accessSignature = playerInfo.accessSignature;
+        $scope.playerInfo = JSON.parse(window.localStorage.getItem("playerInfo"));
+        retriveCurrentGames();
+      });
+    };
     
     function sendMessageToPhonegap(message) {
       // alert("sendMessageToPhonegap:" + message);
@@ -536,40 +558,11 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
           + accessToken,
         function(responseText) {
           var response = JSON.parse(responseText);
-          alert("Welcome back, " + response.name);
-          // alert(accessToken);
-          angular.element(document.getElementById("platformbody")).scope().passAuthToAngular(accessToken);
+          $scope.socialLogin(accessToken);
         }
       );
     }
     
-    $scope.socialLogin = function (message){
-      // alert(JSON.stringify(message));
-      serverApiService.sendMessage(message, function (response) {
-        $scope.response = angular.toJson(response, true);
-        playerInfo = angular.toJson(response[0].playerInfo, true);
-        window.localStorage.setItem("playerInfo", playerInfo);
-        myPlayerId = playerInfo.myPlayerId;
-        accessSignature = playerInfo.accessSignature;
-        $scope.playerInfo = JSON.parse(window.localStorage.getItem("playerInfo"));
-        retriveCurrentGames();
-        
-      });
-    };
     
-    $scope.passAuthToAngular = function(accessToken){
-        //$scope.fbAccessToken = accessToken;
-        var message = [ // SOCIAL_LOGIN - JOIN ACCOUNTS
-            {
-              socialLogin: {
-                myPlayerId: myPlayerId, 
-                accessSignature: accessSignature,
-                accessToken: accessToken,
-                uniqueType: "F"
-              }
-            }
-          ];
-        $scope.socialLogin(message);
-      };
     
 });
