@@ -525,7 +525,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         accessSignature = playerInfo.accessSignature;
         $scope.displayName = playerInfo.displayName;
         $scope.avatarImageUrl = playerInfo.avatarImageUrl;
-        retriveCurrentGames();
+        //retriveCurrentGames();
       });
     };
     
