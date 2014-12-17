@@ -520,7 +520,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
            alert("Received: "+JSON.stringify(response));
            playerInfo = response[0].playerInfo;
         //$scope.response = angular.toJson(response, true);
-        window.localStorage.setItem("playerInfo", playerInfo);
+        window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
         myPlayerId = playerInfo.myPlayerId;
         accessSignature = playerInfo.accessSignature;
         $scope.displayName = playerInfo.displayName;
