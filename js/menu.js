@@ -519,9 +519,9 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
           ];
       serverApiService.sendMessage(message, function (response) {
            alert("Received: "+JSON.stringify(response));
-        $scope.response = angular.toJson(response, true);
-        playerInfo = angular.toJson(response[0].playerInfo, true);
-        $scope.playerInfo = angular.toJson(response[0].playerInfo, true);
+           playerInfo = response[0].playerInfo;
+        //$scope.response = angular.toJson(response, true);
+        $scope.playerInfo = response[0].playerInfo;
         window.localStorage.setItem("playerInfo", playerInfo);
         myPlayerId = playerInfo.myPlayerId;
         $scope.myPlayerId = playerInfo.myPlayerId;
