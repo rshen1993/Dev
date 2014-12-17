@@ -35,8 +35,8 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
      */
 
     var playerInfo = window.localStorage.getItem("playerInfo");
-    alert("PlayerInfo: "+JSON.stringify(playerInfo));
     if (playerInfo === undefined || playerInfo === null) {
+         alert("PlayerInfo: "+JSON.stringify(playerInfo));
         var myName = "guest" + Math.floor(Math.random() * 100000);
         var myAvatar = avatarPool[Math.floor(Math.random() * avatarPool.length)];
         serverApiService.sendMessage(
