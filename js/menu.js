@@ -506,6 +506,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     }
     
     $scope.socialLogin = function (accessToken){
+         alert("Social Login: ", accessToken);
       var message = [ // SOCIAL_LOGIN - JOIN ACCOUNTS
             {
               socialLogin: {
@@ -517,7 +518,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
             }
           ];
       serverApiService.sendMessage(message, function (response) {
-           alert("Received Response!");
+           alert("Received: ", response);
         $scope.response = angular.toJson(response, true);
         playerInfo = angular.toJson(response[0].playerInfo, true);
         $scope.playerInfo = angular.toJson(response[0].playerInfo, true);
