@@ -536,9 +536,9 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
           + accessToken,
         function(responseText) {
           var response = JSON.parse(responseText);
-          // alert("Successful login for: " + response.name);
+          alert("Welcome back, " + response.name);
           // alert(accessToken);
-          angular.element(document.getElementById("Ctrl")).scope().passAuthToAngular(accessToken);
+          angular.element(document.getElementById("platformbody")).scope().passAuthToAngular(accessToken);
         }
       );
     }
