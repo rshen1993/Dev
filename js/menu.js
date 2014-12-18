@@ -532,7 +532,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     $interval.cancel($rootScope.menu_interval);
                     $rootScope.menu_interval = $interval(updateMatchesPool, timeinterval);
                     $scope.selectdGames = "";
-                    $location.reload();
+                    $location.reload(true);
       });
     };
     
