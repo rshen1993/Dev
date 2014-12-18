@@ -531,6 +531,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
                     $interval.cancel($rootScope.menu_interval);
                     $rootScope.menu_interval = $interval(updateMatchesPool, timeinterval);
+                    $scope.selectdGames = "";
       });
     };
     
