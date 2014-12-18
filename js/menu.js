@@ -555,23 +555,24 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
       var message = event.data;
       var source = event.source;
       if (source === window.parent) {
-        // alert("platform got message:" + JSON.stringify(message));
         if (message.token) {
-          // alert("fb token received!");
-          testFbAPI(message.token);
+          FBRegistration(message.token);
         }else if(message.payload && message.payload.regid){
           // alert("registered!: " + message.payload.regid);
-          angular.element(document.getElementById("Ctrl")).scope().giveAngularRegid(message.payload.regid);
+          //angular.element(document.getElementById("Ctrl")).scope().
+          giveAngularRegid(message.payload.regid);
         }else if(message.payload && message.payload.notification){
           // alert("got notification");
-          angular.element(document.getElementById("Ctrl")).scope().giveAngularNotification(message.payload.notification);
-          parent.location = "#/choose-match";
+          //angular.element(document.getElementById("Ctrl")).scope().
+          giveAngularNotification(message.payload.notification);
+          parent.location = '#/menu';
         }else{
           // alert(JSON.stringify(message));
         }
       }
     }, false);
-    function testFbAPI(accessToken) {
+    
+    function FBRegistration(accessToken) {
       makeAjaxCall(
         "https://graph.facebook.com/v2.2/me?format=json&method=get&pretty=0&suppress_http_code=1&access_token="
           + accessToken,
@@ -582,6 +583,28 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
       );
     }
     
+     giveAngularRegid = function(regid){
+        var message = [ //REGISTER_FOR_PUSH_NOTIFICATIONS
+          {
+            registerForPushNotifications: {
+              myPlayerId: myPlayerId, 
+              accessSignature: accessSignature, 
+              gameId: gameId, 
+              registrationId: regid,
+              platformType: "ANDROID"
+            }
+          }
+        ];
+        serverApiService.sendMessage(message, function (response) {
+             //cool
+        });
+      };
+      
+     giveAngularNotification = function(notification){
+        // alert("angular now has notification");
+        $scope.callRefreshTimeout();
+        // alert(JSON.stringify(notification));
+      };
     
     
 });
