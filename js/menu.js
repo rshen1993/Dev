@@ -529,7 +529,8 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     //$window.location.replace(MENU_URL);
                     playerInfo = angular.toJson(response[0].playerInfo, true);
                     window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
-                    $location.path('menu');
+                    $interval.cancel($rootScope.menu_interval);
+                    $rootScope.menu_interval = $interval(updateMatchesPool, timeinterval);
       });
     };
     
