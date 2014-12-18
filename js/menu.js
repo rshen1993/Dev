@@ -35,8 +35,8 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
      */
 
     var playerInfo = window.localStorage.getItem("playerInfo");
+    alert("PlayerInfo: "+JSON.stringify(playerInfo));
     if (playerInfo === undefined || playerInfo === null) {
-         alert("PlayerInfo: "+JSON.stringify(playerInfo));
         var myName = "guest" + Math.floor(Math.random() * 100000);
         var myAvatar = avatarPool[Math.floor(Math.random() * avatarPool.length)];
         serverApiService.sendMessage(
@@ -560,6 +560,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         "https://graph.facebook.com/v2.2/me?format=json&method=get&pretty=0&suppress_http_code=1&access_token="
           + accessToken,
         function(responseText) {
+             alert("Response Text: "+JSON.stringify(responseText));
           var response = JSON.parse(responseText);
           $scope.socialLogin(accessToken);
         }
