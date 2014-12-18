@@ -517,7 +517,6 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
             }
           ];
       serverApiService.sendMessage(message, function (response) {
-           alert("Received: "+JSON.stringify(response));
         //$scope.response = angular.toJson(response, true);
         var playerInfo = response[0].playerInfo;
                     myPlayerId = playerInfo.myPlayerId;
@@ -563,7 +562,6 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         "https://graph.facebook.com/v2.2/me?format=json&method=get&pretty=0&suppress_http_code=1&access_token="
           + accessToken,
         function(responseText) {
-             alert("Response Text: "+JSON.stringify(responseText));
           var response = JSON.parse(responseText);
           $scope.socialLogin(accessToken);
         }
