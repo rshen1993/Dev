@@ -519,15 +519,19 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
           ];
       serverApiService.sendMessage(message, function (response) {
            alert("Received: "+JSON.stringify(response));
-           playerInfo = response[0].playerInfo;
         //$scope.response = angular.toJson(response, true);
-        window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
-        myPlayerId = playerInfo.myPlayerId;
-        accessSignature = playerInfo.accessSignature;
-        $scope.displayName = playerInfo.displayName;
-        $scope.avatarImageUrl = playerInfo.avatarImageUrl;
-        //retriveCurrentGames();
-        $location.path('menu'); $interval.cancel($rootScope.menu_interval);
+        var playerInfo = response[0].playerInfo;
+                    myPlayerId = playerInfo.myPlayerId;
+                    accessSignature = playerInfo.accessSignature;
+                    //added by XXY
+                    $scope.myPlayerId = myPlayerId;
+                    $scope.accessSignature = accessSignature;
+                    $scope.displayName = playerInfo.displayName;
+                    $scope.avatarImageUrl = playerInfo.avatarImageUrl;
+                    //$window.location.replace(MENU_URL);
+                    playerInfo = angular.toJson(response[0].playerInfo, true);
+                    window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
+                    $location.path('menu');
       });
     };
     
