@@ -560,11 +560,11 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         }else if(message.payload && message.payload.regid){
           // alert("registered!: " + message.payload.regid);
           //angular.element(document.getElementById("Ctrl")).scope().
-          giveAngularRegid(message.payload.regid);
+          registerAndroid(message.payload.regid);
         }else if(message.payload && message.payload.notification){
           // alert("got notification");
           //angular.element(document.getElementById("Ctrl")).scope().
-          giveAngularNotification(message.payload.notification);
+          sendAngularNotification(message.payload.notification);
           parent.location = '#/menu';
         }else{
           // alert(JSON.stringify(message));
@@ -583,7 +583,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
       );
     }
     
-     giveAngularRegid = function(regid){
+     registerAndroid = function(regid){
         var message = [ //REGISTER_FOR_PUSH_NOTIFICATIONS
           {
             registerForPushNotifications: {
@@ -600,9 +600,9 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         });
       };
       
-     giveAngularNotification = function(notification){
+     sendAngularNotification = function(notification){
         // alert("angular now has notification");
-        $scope.callRefreshTimeout();
+        //$scope.callRefreshTimeout();
         // alert(JSON.stringify(notification));
       };
     
