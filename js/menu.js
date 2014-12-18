@@ -529,9 +529,20 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     //$window.location.replace(MENU_URL);
                     playerInfo = angular.toJson(response[0].playerInfo, true);
                     window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
-                    $interval.cancel($rootScope.menu_interval);
-                    $rootScope.menu_interval = $interval(updateMatchesPool, timeinterval);
+                    
+                    //RESET EVERYTHING
+                    if($rootScope.interval !== undefined){
+                         $interval.cancel($rootScope.interval);
+                         $rootScope.interval = undefined
+                    }
+                    var timeinterval = 1000;
+                    $scope.myMatchesPool = [];
+                    $scope.myTurnMatches = [];
+                    $scope.oppoTurnMatches = [];
+                    $scope.endMatches = [];
+                    $scope.gamesPool = [];
                     $scope.selectdGames = "";
+                    $rootScope.menu_interval = $interval(updateMatchesPool, timeinterval);
                     $location.reload(true);
       });
     };
