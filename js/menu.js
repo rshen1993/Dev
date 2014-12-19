@@ -529,7 +529,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     //$window.location.replace(MENU_URL);
                     playerInfo = angular.toJson(response[0].playerInfo, true);
                     window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
-                    //retriveCurrentGames();
+                    retriveCurrentGames();
                     /*
                     //RESET EVERYTHING
                     if($rootScope.interval !== undefined){
@@ -549,10 +549,6 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
       });
     };
     
-    function sendMessageToPhonegap(message) {
-      // alert("sendMessageToPhonegap:" + message);
-      window.parent.postMessage(message, "*");
-    }
     window.addEventListener("message", function (event) {
       var message = event.data;
       var source = event.source;
@@ -561,14 +557,13 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         if (message.token) {
           FBRegistration(message.token);
         }else if(message.payload && message.payload.regid){
-          alert("registered!: " + message.payload.regid);
-          //angular.element(document.getElementById("Ctrl")).scope().
+          //alert("registered!: " + message.payload.regid);
           registerAndroid(message.payload.regid);
         }else if(message.payload && message.payload.notification){
           alert("got notification");
           //angular.element(document.getElementById("Ctrl")).scope().
           sendAngularNotification(message.payload.notification);
-          parent.location = '#/menu';
+          //parent.location = '#/menu';
         }else{
           //alert(JSON.stringify(message));
         }
@@ -598,6 +593,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
             }
           }
         ];
+        alert("registerAndroid message: "+JSON.stringify(message));
         serverApiService.sendMessage(message, function (response) {
              alert("registerAndroid response: "+JSON.stringify(response));
         });
@@ -605,7 +601,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
       
      sendAngularNotification = function(notification){
         alert("sendAngularNotification: "+JSON.stringify(notification));
-        //retriveCurrentGames();
+        retriveCurrentGames();
         //$scope.callRefreshTimeout();
       };
     
