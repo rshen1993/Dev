@@ -529,7 +529,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     //$window.location.replace(MENU_URL);
                     playerInfo = angular.toJson(response[0].playerInfo, true);
                     window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
-                    retriveCurrentGames();
+                    //retriveCurrentGames();
                     /*
                     //RESET EVERYTHING
                     if($rootScope.interval !== undefined){
@@ -599,13 +599,13 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
           }
         ];
         serverApiService.sendMessage(message, function (response) {
-             alert("registerAndroid response: "+response);
+             alert("registerAndroid response: "+JSON.stringify(response));
         });
       };
       
      sendAngularNotification = function(notification){
         alert("sendAngularNotification: "+JSON.stringify(notification));
-        retriveCurrentGames();
+        //retriveCurrentGames();
         //$scope.callRefreshTimeout();
       };
     
