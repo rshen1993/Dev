@@ -529,7 +529,8 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     //$window.location.replace(MENU_URL);
                     playerInfo = angular.toJson(response[0].playerInfo, true);
                     window.localStorage.setItem("playerInfo", angular.toJson(playerInfo));
-                    
+                    retriveCurrentGames();
+                    /*
                     //RESET EVERYTHING
                     if($rootScope.interval !== undefined){
                          $interval.cancel($rootScope.interval);
@@ -544,6 +545,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     $scope.selectdGames = "";
                     $rootScope.menu_interval = $interval(updateMatchesPool, timeinterval);
                     $location.reload(true);
+                    */
       });
     };
     
