@@ -557,19 +557,20 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
       var message = event.data;
       var source = event.source;
       if (source === window.parent) {
+           alert("eventlistener message: "+JSON.stringify(message));
         if (message.token) {
           FBRegistration(message.token);
         }else if(message.payload && message.payload.regid){
-          // alert("registered!: " + message.payload.regid);
+          alert("registered!: " + message.payload.regid);
           //angular.element(document.getElementById("Ctrl")).scope().
           registerAndroid(message.payload.regid);
         }else if(message.payload && message.payload.notification){
-          // alert("got notification");
+          alert("got notification");
           //angular.element(document.getElementById("Ctrl")).scope().
           sendAngularNotification(message.payload.notification);
           parent.location = '#/menu';
         }else{
-          // alert(JSON.stringify(message));
+          //alert(JSON.stringify(message));
         }
       }
     }, false);
@@ -598,14 +599,14 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
           }
         ];
         serverApiService.sendMessage(message, function (response) {
-             //cool
+             alert("registerAndroid response: "+response);
         });
       };
       
      sendAngularNotification = function(notification){
-        // alert("angular now has notification");
+        alert("sendAngularNotification: "+JSON.stringify(notification));
+        retriveCurrentGames();
         //$scope.callRefreshTimeout();
-        // alert(JSON.stringify(notification));
       };
     
     
