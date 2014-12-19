@@ -488,7 +488,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     
     
     function sendMessageToPhonegap(message) {
-    alert("sendMessageToPhonegap:" + message);
+    //alert("sendMessageToPhonegap:" + message);
     window.parent.postMessage(message, "*");
    }
    
@@ -553,7 +553,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
       var message = event.data;
       var source = event.source;
       if (source === window.parent) {
-           alert("eventlistener message: "+JSON.stringify(message));
+          //alert("eventlistener message: "+JSON.stringify(message));
         if (message.token) {
           FBRegistration(message.token);
         }else if(message.payload && message.payload.regid){
@@ -593,14 +593,14 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
             }
           }
         ];
-        alert("registerAndroid message: "+JSON.stringify(message));
+        //alert("registerAndroid message: "+JSON.stringify(message));
         serverApiService.sendMessage(message, function (response) {
-             alert("registerAndroid response: "+JSON.stringify(response));
+             //alert("registerAndroid response: "+JSON.stringify(response));
         });
       };
       
      sendAngularNotification = function(notification){
-        alert("sendAngularNotification: "+JSON.stringify(notification));
+        //alert("sendAngularNotification: "+JSON.stringify(notification));
         retriveCurrentGames();
         //$scope.callRefreshTimeout();
       };
