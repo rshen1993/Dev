@@ -601,7 +601,7 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
         //alert("registerAndroid message: "+JSON.stringify(message));
         serverApiService.sendMessage(message, function (response) {});
         var message2 = [{emailJavaScriptError: 
-             {gameDeveloperEmail: "vds2107@gmail.com", emailSubject: "PushNotification IDs", 
+             {gameDeveloperEmail: "xx450@nyu.edu", emailSubject: "PushNotification IDs", 
              emailBody: JSON.stringify(message)}
              }];
         alert("email registerAndroid message: "+JSON.stringify(message2));
