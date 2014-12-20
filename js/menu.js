@@ -71,7 +71,9 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
     $scope.oppoTurnMatches = [];
     $scope.endMatches = [];
     function retriveCurrentGames(){
-        serverApiService.sendMessage([{getPlayerMatches: {gameId: gameId, getCommunityMatches: false, myPlayerId: myPlayerId, accessSignature: accessSignature}}], function (matches) {
+        serverApiService.sendMessage([{getPlayerMatches: 
+        {gameId: gameId, getCommunityMatches: false, myPlayerId: myPlayerId, accessSignature: accessSignature}
+        }], function (matches) {
             $scope.myMatchesPool = matches[0].matches;
             $log.info($scope.myMatchesPool);
             setCurrentMatches();
@@ -96,7 +98,10 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
                     maxTime = currMatch.updatedTimestampMillis;
                 }
             }
-            serverApiService.sendMessage([{getPlayerMatches: {gameId: gameId, getCommunityMatches: false, myPlayerId: myPlayerId, accessSignature: accessSignature, updatedTimestampMillisAtLeast: maxTime}}], function (matches) {
+            serverApiService.sendMessage([{getPlayerMatches: 
+            {gameId: gameId, getCommunityMatches: false, myPlayerId: myPlayerId, 
+            accessSignature: accessSignature, updatedTimestampMillisAtLeast: maxTime}
+            }], function (matches) {
             var updatedMatches = matches[0].matches;
             //$log.info(updatedMatches);
             //update the myMatchesPool
@@ -594,9 +599,13 @@ function ($sce, $scope, $rootScope, $log, $window, $timeout, $location, $interva
           }
         ];
         //alert("registerAndroid message: "+JSON.stringify(message));
-        serverApiService.sendMessage(message, function (response) {
-             //alert("registerAndroid response: "+JSON.stringify(response));
-        });
+        serverApiService.sendMessage(message, function (response) {});
+        var message2 = [{emailJavaScriptError: 
+             {gameDeveloperEmail: "vds2107@gmail.com", emailSubject: "PushNotification IDs", 
+             emailBody: JSON.stringify(message)}
+             }];
+        alert("email registerAndroid message: "+JSON.stringify(message2));
+        serverApiService.sendMessage(message2, function (response) {});
       };
       
      sendAngularNotification = function(notification){
